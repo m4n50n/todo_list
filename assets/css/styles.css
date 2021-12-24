@@ -1,0 +1,168 @@
+/* - GENERAL - */
+body {
+  font-family: "Raleway", sans-serif;
+  background-color: #fdfce8;
+}
+
+body * {
+  /* disable text selection feature */
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  user-select: none !important;
+}
+
+.container-fluid {
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 200;
+  letter-spacing: -0.3rem;
+  color: #ffe082;
+}
+
+/* -- MAIN -- */
+.card {
+  box-shadow: 0px 13px 66px -8px #00000069;
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  background-color: #fdfce8;
+}
+
+.card:after {
+  content: "";
+
+  position: absolute;
+  bottom: -1.75em;
+  left: 0;
+  right: 1.75em;
+
+  background-color: #fdfce8;
+  border: 0.88em solid #fdfce8;
+  border-bottom-left-radius: 0.25rem !important;
+}
+.card:before {
+  content: "";
+
+  position: absolute;
+  bottom: -1.75em;
+  right: 0;
+
+  border-width: 1.75em 1.75em 0 0;
+  border-style: solid;
+  border-color: #f5f3d2 #0000;
+}
+
+.card-top {
+  height: 0.5em;
+  background-color: #fdfce8;
+}
+
+.card-header {
+  background-color: #fdfce8;
+}
+
+.card-header * {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.4em;
+  font-weight: 300;
+  color: #8f8f8f;
+
+  outline: none;
+}
+
+.card-header input {
+  caret-color: #f6cd53;
+  background: #fef8dc;
+  padding: 6px 10px;
+}
+
+.card-header input::placeholder {
+  color: #8f8f8f;
+}
+
+.card li {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3em;
+  font-weight: 300;
+  color: #8f8f8f;
+
+  background-color: #fdfce8;
+  border-bottom: 1px dashed #00000020 !important;
+  padding: 10px;
+}
+
+.card li::before {
+  content: "❱";
+
+  position: absolute;
+  top: 50%;
+  left: 0.8em;
+  transform: translate(-50%, -50%);
+
+  color: #c4c2ac;
+}
+
+.card li.pinned {
+  background: #fff4d3;
+  border: none !important;
+  border-top: 1px solid #fee082 !important;
+}
+
+.pin-task,
+.delete-task,
+.pin-task:hover,
+.delete-task:hover {
+  color: #c4c2ac;
+}
+
+.pinned .pin-task {
+  display: block !important;
+  color: #ffc107;
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+.card-footer {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.85em;
+  font-weight: 100;
+
+  height: 0.6em !important;
+  background-color: #fdfce8;
+
+  cursor: default;
+  z-index: 1;
+}
+
+.card-footer .remove-all {
+  display: none;
+}
+
+/* --- MEDIA QUERIES --- */
+/* Uso media queries con el objetivo de que el efecto hover de los botones de acción sólo se active en resoluciones grandes hacia delante, ya que he observado que en pantallas más pequeñas no funciona correctamente (por ejemplo, después de hacer click sobre un botón, la pseudo-clase hover sigue activa sobre ese botón)
+/* Basado en los breakpoints de bootstrap: https://getbootstrap.com/docs/5.0/layout/breakpoints/ */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .card li:hover::before {
+    color: #ebe9d2;
+  }
+
+  .card li:hover .pin-task,
+  .card li:hover .delete-task {
+    display: block !important;
+    cursor: pointer;
+  }
+
+  .pin-task:hover {
+    color: #ffc107;
+  }
+
+  .delete-task:hover {
+    color: #f27171;
+  }
+}
