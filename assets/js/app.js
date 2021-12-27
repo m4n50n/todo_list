@@ -7,6 +7,10 @@ window.onload = function() {
         }
     });
 
+    nt_input.addEventListener("focusout", (e) => {
+        add_task(nt_input);
+    });
+
     document.addEventListener("click", (e) => {
         let tg = e.target;
         
