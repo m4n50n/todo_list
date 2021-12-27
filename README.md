@@ -20,7 +20,7 @@ pip3 install flask && python3 server.py
 
 ## Instructions 📄
 
-* The tasks are added when the user enters any text and press the ***Enter*** key or when the user looses focus on the input.
+* The tasks are added when the user enters any text and press the ***Enter*** key.
 * The delete / pin icon shows on the side of every task. In <u>large</u> resolutions they will be displayed on ***hover***; In <u>small</u> resolutions they will be displayed by default.
 * The user can add as many tasks as needed.
 * The number of added tasks is displayed in the lower left corner.

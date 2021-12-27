@@ -1,56 +1,26 @@
-window.onload = function() {    
-    const nt_input = document.querySelector("#new-task");
+const task_input = document.querySelector("#new-task");
+const task_list = document.querySelector("#task-list");
+const task_counter = document.querySelector("#task-counter #count");
+
+task_input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        add_task(task_input);
+    }
+});
+
+const add_task = (task_input) => {
+    let val = task_input.value.trim();
+
+    if (val.length === 0) { return false; } 
+
+    render_task(val);
+    update_task_counter();
     
-    nt_input.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            add_task(nt_input);
-        }
-    });
-
-    nt_input.addEventListener("focusout", (e) => {
-        add_task(nt_input);
-    });
-
-    document.addEventListener("click", (e) => {
-        let tg = e.target;
-        
-        if (tg.classList.contains("remove-all")) {
-            delete_all_tasks();
-        }
-    });
+    task_input.value = "";
+    task_input.focus();
 }
 
-const tasks_counter = (action = true) => {
-    let elmnt = document.querySelector("#task-counter #count");
-    let count = elmnt.getAttribute("data-counter");
-
-    if (action) { count++; } else { count--; }
-
-    elmnt.setAttribute("data-counter", count);
-    elmnt.innerHTML = (count === 1) ? count + " item" : count + " items";
-
-    fadeIn(elmnt);
-
-    document.querySelector(".remove-all").style.display = (count > 0) ? "block" : "none";
-
-    return false;
-}
-
-const reset_tasks_counter = () => {
-    let elmnt = document.querySelector("#task-counter #count");
-    elmnt.setAttribute("data-counter", 0);
-    elmnt.innerHTML = "0 items";
-
-    fadeIn(elmnt);
-
-    document.querySelector(".remove-all").style.display = "none";
-}
-
-const add_task = (element) => {
-    let val = element.value;
-
-    if (val.trim().length === 0) { return false; } 
-
+const render_task = (task) => {
     let li = document.createElement("li");
     li.classList.add("list-group-item", "ps-5", "d-flex", "align-items-center", "justify-content-between");
 
@@ -58,7 +28,7 @@ const add_task = (element) => {
      * Uso stopPropagation() para forzar la captura del evento click sólo en <a> y no en <svg> o <path>
      * https://developer.mozilla.org/es/docs/Web/API/Event/stopPropagation
      */
-    let li_content = `${val}
+    let li_content = `${task}
     <div class="d-flex justify-content-end align-items-center">
         <a title="Pin task" href="#" onclick="event.stopPropagation(); pin_task(this.closest(\'li\'));" class="pin-task d-lg-none px-2">    
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
@@ -74,69 +44,39 @@ const add_task = (element) => {
     </div>`;
 
     li.innerHTML = li_content;
-    document.querySelector("#task-list").appendChild(li);
-
-    element.value = "";
-    element.focus();
-    tasks_counter();
-}
-
-const pin_task = (element) => {
-    let ul = document.querySelector("#task-list");
-    let class_name = "pinned";
-    let pin_task_ct = element.querySelector(".pin-task")
-    
-    if (element.classList.contains(class_name)) {
-        element.classList.remove(class_name);
-        pin_task_ct.classList.remove("order-last");
-
-        ul.append(element);
-        
-        return false;
-    }
-
-    element.classList.add(class_name);
-    pin_task_ct.classList.add("order-last");
-    ul.prepend(element);
+    task_list.appendChild(li);
 }
 
 const delete_task = (element) => {
-    fadeOut(element);
-    tasks_counter(false);
-
-    setTimeout(() => {
-        element.remove();
-    }, 220);
+    element.remove();
+    update_task_counter();
 }
 
 const delete_all_tasks = () => {
-    document.querySelector("#task-list").innerHTML = "";
-    reset_tasks_counter();
+    task_list.innerHTML = "";
+    update_task_counter();
 }
 
-/**
- * Fade animations: 
- * Source: https://dev.to/bmsvieira/vanilla-js-fadein-out-2a6o
- */
-const fadeIn = (el) => {
-    el.style.opacity = 0;
-    el.style.display = "block";
-    (function fade() {
-        var val = parseFloat(el.style.opacity);
-        if (!((val += .1) > 1)) {
-            el.style.opacity = val;
-            requestAnimationFrame(fade);
-        }
-    })();
+const update_task_counter = () => {
+    let counter = task_list.getElementsByTagName("li").length;
+    
+    task_counter.innerHTML = counter + ((counter === 1) ? " item" : " items");
+    document.querySelector(".remove-all").style.display = (counter > 0) ? "block" : "none";
 }
 
-const fadeOut = (el) => {
-    el.style.opacity = 1;
-    (function fade() {
-        if ((el.style.opacity -= .1) < 0) {
-            el.style.display = "none";
-        } else {
-            requestAnimationFrame(fade);
-        }
-    })();
-};
+const pin_task = (element) => {
+    let class_name = "pinned";
+    let pin_task_ct = element.querySelector(".pin-task")
+    
+    if (element.classList.contains(class_name)) { // the element is pinned
+        element.classList.remove(class_name);
+        pin_task_ct.classList.remove("order-last");
+
+        task_list.append(element);
+    }
+    else {
+        element.classList.add(class_name);
+        pin_task_ct.classList.add("order-last");
+        task_list.prepend(element);
+    }
+}
