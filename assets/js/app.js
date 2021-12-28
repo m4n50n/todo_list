@@ -9,11 +9,11 @@ task_input.addEventListener("keypress", (e) => {
 });
 
 const add_task = (task_input) => {
-    let val = task_input.value.trim();
+    let inserted_task = task_input.value.trim();
 
-    if (val.length === 0) { return false; } 
+    if (inserted_task.length === 0) { return false; } 
 
-    render_task(val);
+    render_task(inserted_task);
     update_task_counter();
     
     task_input.value = "";
@@ -58,7 +58,7 @@ const delete_all_tasks = () => {
 }
 
 const update_task_counter = () => {
-    let counter = task_list.getElementsByTagName("li").length;
+    let counter = task_list.querySelectorAll("li").length;
     
     task_counter.innerHTML = counter + ((counter === 1) ? " item" : " items");
     document.querySelector(".remove-all").style.display = (counter > 0) ? "block" : "none";
