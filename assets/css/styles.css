@@ -104,26 +104,9 @@ h1 {
   color: #c4c2ac;
 }
 
-.card li.pinned {
-  background: #fff4d3;
-  border: none !important;
-  border-top: 1px solid #fee082 !important;
-}
-
-.pin-task,
 .delete-task,
-.pin-task:hover,
 .delete-task:hover {
   color: #c4c2ac;
-}
-
-.pinned .pin-task {
-  display: block !important;
-  color: #ffc107;
-  -webkit-transform: scale(1.15);
-  -moz-transform: scale(1.15);
-  -ms-transform: scale(1.15);
-  transform: scale(1.15);
 }
 
 .card-footer {
@@ -152,14 +135,9 @@ h1 {
     color: #ebe9d2;
   }
 
-  .card li:hover .pin-task,
   .card li:hover .delete-task {
     display: block !important;
     cursor: pointer;
-  }
-
-  .pin-task:hover {
-    color: #ffc107;
   }
 
   .delete-task:hover {
