@@ -47,7 +47,7 @@ const RenderTask = (task, index) => {
      * Uso stopPropagation() para forzar la captura del evento click sólo en <a> y no en <svg> o <path>
      * https://developer.mozilla.org/es/docs/Web/API/Event/stopPropagation
      */
-    let li_content = `${task}
+    let LiContent = `${task}
     <div class="d-flex justify-content-end align-items-center">
         <a title="Delete Task" href="#" onclick="event.stopPropagation(); DeleteTask(${index});" class="delete-task d-lg-none px-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -56,7 +56,7 @@ const RenderTask = (task, index) => {
         </a>
     </div>`;
 
-    li.innerHTML = li_content;
+    li.innerHTML = LiContent;
     TasksList.appendChild(li);
 }
 
