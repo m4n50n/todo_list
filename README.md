@@ -1,5 +1,7 @@
 # ![4Geeks Logo](http://assets.breatheco.de/apis/img/images.php?blob&random&cat=icon&tags=4geeks,16) TODO List with Vanilla JS
 
+![screenshot](https://raw.githubusercontent.com/m4n50n/todo_list/main/screenshot_preview.png)
+
 ✏ *Create a TODO list application that allows users to add and delete tasks. Inspired in **./preview.gif***.
 
 ## What to do next?
